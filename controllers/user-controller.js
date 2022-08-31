@@ -41,17 +41,17 @@ const userController = {
       })
       .catch((err) => res.status(400).json(err));
   },
-  deleteUser({params}, res){
-    User.findOneAndDelete({_id: params.id})
-      .then(dbUser => {
-        if(!dbUser){
-          res.status(404).json({message: 'No user found with this id!'});
+  deleteUser({ params }, res) {
+    User.findOneAndDelete({ _id: params.id })
+      .then((dbUser) => {
+        if (!dbUser) {
+          res.status(404).json({ message: "No user found with this id!" });
           return;
         }
         res.json(dbUser);
       })
-      .catch(err => res.status(400).json(err));
-  }
+      .catch((err) => res.status(400).json(err));
+  },
 };
 
 module.exports = userController;
