@@ -1,11 +1,10 @@
 const { Schema, model, Types } = require("mongoose");
 
-
 const ReactionSchema = new Schema(
   {
     reactionId: {
       type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId()
+      default: () => new Types.ObjectId(),
     },
     reactionBody: {
       type: String,
@@ -14,20 +13,20 @@ const ReactionSchema = new Schema(
     },
     username: {
       type: String,
-      required: true
+      required: true,
     },
     createdAt: {
       type: Date,
       default: Date.now,
-      get: createdAtVal => dateFormat(createdAtVal)
-    }
+      get: (createdAtVal) => dateFormat(createdAtVal),
+    },
   },
   {
     toJSON: {
-      getters: true
-    }
+      getters: true,
+    },
   }
-)
+);
 
 const ThoughtSchema = new Schema(
   {
@@ -39,18 +38,18 @@ const ThoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: createdAtVal => dateFormat(createdAtVal)// need to create a date format utils
+      get: (createdAtVal) => dateFormat(createdAtVal), // need to create a date format utils
     },
     username: {
       type: String,
-      required: true
+      required: true,
     },
-    reactions: [reactionSchema]
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
-      getters: true
-    }
+      getters: true,
+    },
   }
 );
 
