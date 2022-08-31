@@ -1,10 +1,9 @@
-const { MongoUnexpectedServerResponseError } = require("mongodb");
 const { User } = require("../models");
 
 const userController = {
   getAllUsers(req, res) {
     User.find({})
-      .select("-__v")
+      //.select("-__v")
       .then((dbUser) => res.json(dbUser))
       .catch((err) => {
         console.log(err);
@@ -27,7 +26,7 @@ const userController = {
       });
   },
   createUser({ body }, res) {
-    User.findOneAndUpdate(body)
+    User.create(body)
       .then((dbUser) => res.json(dbUser))
       .catch((err) => res.status(400).json(err));
   },
@@ -42,4 +41,17 @@ const userController = {
       })
       .catch((err) => res.status(400).json(err));
   },
+  deleteUser({params}, res){
+    User.findOneAndDelete({_id: params.id})
+      .then(dbUser => {
+        if(!dbUser){
+          res.status(404).json({message: 'No user found with this id!'});
+          return;
+        }
+        res.json(dbUser);
+      })
+      .catch(err => res.status(400).json(err));
+  }
 };
+
+module.exports = userController;
