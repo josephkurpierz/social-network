@@ -44,7 +44,7 @@ const ThoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (createdAtVal) => dateFormat(createdAtVal), // need to create a date format utils
+      get: (createdAtVal) => dateFormat(createdAtVal), 
     },
     username: {
       type: String,
